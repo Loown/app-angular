@@ -1,6 +1,6 @@
-import { style } from '@angular/animations';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-
+import { ColorService } from 'src/app/services/color.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-box',
   templateUrl: './box.component.html',
@@ -8,13 +8,25 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 })
 export class BoxComponent implements OnInit, OnChanges {
 
-  @Input() color: string = '';
+  @Input() color: string;
   colorText: string = '#FFFFFF';
+  shades: string[] = [];
 
-  constructor() {
+  constructor(
+    private colorService: ColorService,
+    private matSnackBar: MatSnackBar
+    ) { }
+    
+    ngOnInit(): void {
+    this.getShades()
+    console.log(this.shades)
   }
 
-  ngOnInit(): void {
+  getShades() {
+    const shades = [-100, -90, -80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    shades.map((shade: number) => {
+      this.shades.push(this.colorService.adjust(this.color, shade))
+    })
   }
   //onEventNewColor =>
   ngOnChanges(changes: any): void {
@@ -45,5 +57,10 @@ export class BoxComponent implements OnInit, OnChanges {
       if ((colorSum - 22) < 0) return '#FFFFFF';
     }
     return '#000000';
+  }
+
+  copyToClipboard() {
+    navigator.clipboard.writeText('#' + this.color);
+    this.matSnackBar.open('Code hexa enregistré : ' + this.color, 'Fermé')
   }
 }
