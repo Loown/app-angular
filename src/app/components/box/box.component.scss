@@ -1,4 +1,28 @@
 .test-shades {
-    width: 300px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    .shades {
+        flex-grow: 1;
+
+        .shade-text {
+            display: none;
+            font-size: 20px;
+        }
+
+        &:hover > .shade-text {
+            display: block;
+        }
+    }
+}
+
+.shade {
+    height: 100%;
+}
+
+.color-box {
     height: 100%;
 }

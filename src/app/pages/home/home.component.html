@@ -1,3 +1,19 @@
-<div class="columns">
-    <app-box *ngFor="let box of boxes" class="column" [color]="box.color"></app-box>
+<div class="columns m-0 page">
+    <!-- <app-box *ngFor="let box of boxes" class="column p-0" [color]="box.color"></app-box> -->
+    <div class="columns m-0 p-0 color-box" [ngStyle]="{ backgroundColor: box.hex, colorText: box.textColor }" *ngFor="let box of boxes" class="column p-0">
+        <div class="column shade">
+            <button mat-mini-fab aria-label="Example icon button with a home icon">
+                <mat-icon>home</mat-icon>
+            </button>
+            <button mat-mini-fab aria-label="Example icon button with a home icon" (click)=copyToClipboard(box)>
+                <mat-icon>home</mat-icon>
+            </button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
+        </div>
+        <!-- <div class="test-shades" *ngIf="showShades">
+            <div class="shades" *ngFor="let shade of shades" [ngStyle]="{'background-color': shade}">
+                <div class="shade-text">{{ shade }}</div>
+            </div>
+        </div> -->
+    </div>
 </div>

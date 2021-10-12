@@ -11,6 +11,7 @@ export class BoxComponent implements OnInit, OnChanges {
   @Input() color: string;
   colorText: string = '#FFFFFF';
   shades: string[] = [];
+  showShades: boolean = false;
 
   constructor(
     private colorService: ColorService,
