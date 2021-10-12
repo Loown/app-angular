@@ -1,1 +1,12 @@
-<p>box works!</p>
+<div class="columns is-full box" [ngStyle]="{backgroundColor: color, color: colorText}">
+    <button mat-mini-fab aria-label="Example icon button with a home icon">
+        <mat-icon>home</mat-icon>
+    </button>
+    <button mat-mini-fab aria-label="Example icon button with a home icon" (click)=copyToClipboard()>
+        <mat-icon>home</mat-icon>
+    </button>
+    <div class="test-shades">
+        <div class="shades" *ngFor="let shade of shades" [ngStyle]="{'background-color': shade}">aze</div>
+    </div>
+</div>
+

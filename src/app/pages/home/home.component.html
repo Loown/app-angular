@@ -1,14 +1,3 @@
 <div class="columns">
-    <div class="column">
-        First column
-    </div>
-    <div class="column">
-        Second column
-    </div>
-    <div class="column">
-        Third column
-    </div>
-    <div class="column">
-        Fourth column
-    </div>
+    <app-box *ngFor="let box of boxes" class="column" [color]="box.color"></app-box>
 </div>

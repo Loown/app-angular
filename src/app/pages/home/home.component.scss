@@ -1,12 +1,7 @@
-.container {
+.page {
     height: 100vh;
-    display: flex;
-    justify-content: stretch;
-    width: 100%;
-
-    .box {
+    .color-box {
         background-color: blue;
         border: 1px solid #000;
-        width: 100px;
     }
 }
