@@ -5,11 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
+import { BoxComponent } from './components/box/box.component';
+import { BoxMenuComponent } from './components/box-menu/box-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    BoxComponent,
+    BoxMenuComponent
   ],
   imports: [
     BrowserModule,
