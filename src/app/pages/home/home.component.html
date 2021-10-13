@@ -1,6 +1,14 @@
 <div class="columns m-0 page">
     <!-- <app-box *ngFor="let box of boxes" class="column p-0" [color]="box.color"></app-box> -->
-    <div class="columns m-0 p-0 color-box" [ngStyle]="{ backgroundColor: box.hex, colorText: box.textColor }" *ngFor="let box of boxes" class="column p-0">
+    <button mat-icon-button (click)=newColor() class="btn btn-primary btn-add-color">
+        <mat-icon>add</mat-icon>
+    </button>
+    <div class="columns m-0 p-0 color-box" [ngStyle]="{ backgroundColor: box.hex, colorText: box.textColor }"
+        *ngFor="let box of boxes" class="column p-0">
+        <button mat-icon-button (click)=newColor(box) class="btn btn-primary column btn-add-color btn-add-color-right"
+            [ngStyle]="{left: (100/boxes.length)*(boxes.indexOf(box) + 1) + '%'}">
+            <mat-icon class=btn-add-icon>add</mat-icon>
+        </button>
         <div class="column shade">
             <button mat-mini-fab aria-label="Example icon button with a home icon">
                 <mat-icon>home</mat-icon>
@@ -8,13 +16,16 @@
             <button mat-mini-fab aria-label="Example icon button with a home icon" (click)=copyToClipboard(box)>
                 <mat-icon>home</mat-icon>
             </button>
-            <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
-            <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)">close</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon"
+                [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)">
+                close</mat-icon>
         </div>
         <!-- <div class="test-shades" *ngIf="showShades">
             <div class="shades" *ngFor="let shade of shades" [ngStyle]="{'background-color': shade}">
                 <div class="shade-text">{{ shade }}</div>
             </div>
         </div> -->
+
     </div>
 </div>
