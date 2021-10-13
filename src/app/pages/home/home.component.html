@@ -1,8 +1,5 @@
 <div class="columns m-0 page">
     <!-- <app-box *ngFor="let box of boxes" class="column p-0" [color]="box.color"></app-box> -->
-    <button mat-icon-button (click)=newColor() class="btn btn-primary btn-add-color">
-        <mat-icon>add</mat-icon>
-    </button>
     <div class="columns m-0 p-0 color-box" [ngStyle]="{ backgroundColor: box.hex, colorText: box.textColor }"
         *ngFor="let box of boxes" class="column p-0">
         <button mat-icon-button (click)=newColor(box) class="btn btn-primary column btn-add-color btn-add-color-right"
