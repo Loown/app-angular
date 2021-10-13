@@ -9,6 +9,7 @@
                 <mat-icon>home</mat-icon>
             </button>
             <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)">close</mat-icon>
         </div>
         <!-- <div class="test-shades" *ngIf="showShades">
             <div class="shades" *ngFor="let shade of shades" [ngStyle]="{'background-color': shade}">

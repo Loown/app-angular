@@ -105,5 +105,9 @@ export class HomeComponent implements OnInit {
     })
     box.isLock = true;
   }
+
+  removeColor(box: Box) {
+    this.boxes = this.boxes.filter((b: Box) => b.hex !== box.hex)
+  }
 }
 
