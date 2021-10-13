@@ -15,7 +15,7 @@ export interface Box {
 
 export class HomeComponent implements OnInit {
 
-  boxes : Box[] = [];
+  boxes: Box[] = [];
 
   constructor(
     private colorService: ColorService,
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
 
   generate() {
     this.boxes = this.boxes.map((box: Box) => {
-      if(!box.isLock) {
+      if (!box.isLock) {
         box.hex = this.getRandomColor();
         box.textColor = this.colorOfText(box.hex);
       }
@@ -108,6 +108,23 @@ export class HomeComponent implements OnInit {
 
   removeColor(box: Box) {
     this.boxes = this.boxes.filter((b: Box) => b.hex !== box.hex)
+  }
+
+  newColor(box :Box | void) : void {
+    if(this.boxes.length > 8) return;
+    if(box) {
+      this.boxes.splice(this.boxes.indexOf(box) + 1,0,{
+        hex: this.getRandomColor(),
+        textColor: "",
+        isLock: false
+      });
+    } else {
+      this.boxes.unshift({
+        hex: this.getRandomColor(),
+        textColor: "",
+        isLock: false
+      });
+    }    
   }
 }
 
