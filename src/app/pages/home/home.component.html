@@ -1,6 +1,6 @@
 <div class="columns m-0 page">
     <!-- <app-box *ngFor="let box of boxes" class="column p-0" [color]="box.color"></app-box> -->
-    <div class="column m-0 p-0 color-box" @testTransition [ngStyle]="{ backgroundColor: box.hex, colorText: box.textColor }"
+    <div class="column m-0 p-0 color-box" @testTransition [ngStyle]="{ backgroundColor: box.hex, color: box.textColor }"
         *ngFor="let box of boxes; let i = index">
         <div class="inner-box">
             <div class="left-bar" >
