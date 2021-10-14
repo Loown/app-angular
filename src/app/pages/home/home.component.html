@@ -8,15 +8,22 @@
                     <mat-icon class=btn-add-icon>add</mat-icon>
                 </button>
             </div>
-            <div class="menu">
+            <div class="menu" *ngIf="!box.isShadesView">
                 <div class="icons">
-                    <mat-icon class="box-icon">palette</mat-icon>
+                    <mat-icon class="box-icon" (click)="box.isShadesView = true">texture</mat-icon>
                     <mat-icon (click)=copyToClipboard(box) class="box-icon">content_copy</mat-icon>
                     <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
                     <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)" *ngIf="boxes.length > 2">close</mat-icon>
                 </div>
                 <div class="infos">
                     <p>{{ box.hex }}</p>
+                </div>
+            </div>
+            <div class="shades" *ngIf="box.isShadesView">
+                <div *ngFor="let shade of box.shades" [ngStyle]="{ backgroundColor: shade }" (click)="selectShade(box, shade)">
+                    <p class="shade-text" [ngClass]="{'current': box.hex.toLowerCase() === shade.toLowerCase()}">
+                        {{ shade }}
+                    </p>
                 </div>
             </div>
         </div>

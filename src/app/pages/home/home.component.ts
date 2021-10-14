@@ -7,6 +7,8 @@ export interface Box {
   hex: string;
   textColor: string;
   isLock: boolean;
+  shades: string[];
+  isShadesView: boolean;
 }
 
 
@@ -41,7 +43,14 @@ export class HomeComponent implements OnInit {
     for (let i = 0; i < 5; i++) {
       const hex = this.getRandomColor();
       const textColor = this.colorOfText(hex);
-      this.boxes.push({ hex, textColor, isLock: false });
+      const shades = this.getShades(hex);
+      this.boxes.push({
+        hex,
+        textColor,
+        shades,
+        isLock: false,
+        isShadesView: false,
+      });
     }
   }
 
@@ -74,12 +83,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  // getShades() {
-  //   const shades = [-100, -90, -80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-  //   shades.map((shade: number) => {
-  //     this.shades.push(this.colorService.adjust(this.color, shade))
-  //   })
-  // }
+  getShades(color: string) {
+    const shades = [-100, -90, -80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    return shades.map((shade: number) => {
+      return this.colorService.adjust(color, shade);
+    })
+  }
 
   valueRGB(c: string): number {
     let value = 0;
@@ -128,11 +137,26 @@ export class HomeComponent implements OnInit {
   newColor(box :Box) : void {
     const hex = this.getRandomColor();
     const textColor = this.colorOfText(hex);
+    const shades = this.getShades(hex);
     this.boxes.splice(this.boxes.indexOf(box),0,{
       hex,
       textColor,
-      isLock: false
+      shades,
+      isLock: false,
+      isShadesView: false,
     });  
+  }
+
+  selectShade(box: Box, shade: string) {
+    this.boxes.map((b: Box) => {
+      if (b.hex === box.hex) {
+        b.hex = shade;
+        b.shades = this.getShades(b.hex);
+        b.textColor = this.colorOfText(b.hex);
+        b.isShadesView = false;
+      }
+      return b;
+    })
   }
 }
 
