@@ -9,13 +9,15 @@
                 </button>
             </div>
             <div class="menu">
-                <mat-icon class="box-icon">palette</mat-icon>
-                <mat-icon (click)=copyToClipboard(box) class="box-icon">content_copy</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
-                <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)" *ngIf="boxes.length > 2">close</mat-icon>
-            </div>
-            <div class="infos">
-                <p>{{box.hex}}</p>
+                <div class="icons">
+                    <mat-icon class="box-icon">palette</mat-icon>
+                    <mat-icon (click)=copyToClipboard(box) class="box-icon">content_copy</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)" *ngIf="boxes.length > 2">close</mat-icon>
+                </div>
+                <div class="infos">
+                    <p>{{ box.hex }}</p>
+                </div>
             </div>
         </div>
         <!-- <div class="test-shades" *ngIf="showShades">
