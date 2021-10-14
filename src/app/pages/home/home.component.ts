@@ -1,21 +1,36 @@
 import { Component, OnInit, HostListener, EventEmitter } from '@angular/core';
 import { ColorService } from 'src/app/services/color.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 export interface Box {
   hex: string;
   textColor: string;
   isLock: boolean;
 }
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('testTransition', [
+      transition(':enter', [
+        style({ 'flex-grow': 0, 'width': 0 }),
+        animate('300ms', style({ 'flex-grow': 1  })),
+      ]),
+      transition(':leave', [
+        animate('300ms', style({ 'flex-grow': 0, 'width': 0 }))
+      ])
+    ]),
+  ]
 })
 
 export class HomeComponent implements OnInit {
 
   boxes: Box[] = [];
+  isClicked: boolean = false;
 
   constructor(
     private colorService: ColorService,
@@ -110,21 +125,12 @@ export class HomeComponent implements OnInit {
     this.boxes = this.boxes.filter((b: Box) => b.hex !== box.hex)
   }
 
-  newColor(box :Box | void) : void {
-    if(this.boxes.length > 8) return;
-    if(box) {
-      this.boxes.splice(this.boxes.indexOf(box) + 1,0,{
-        hex: this.getRandomColor(),
-        textColor: "",
-        isLock: false
-      });
-    } else {
-      this.boxes.unshift({
-        hex: this.getRandomColor(),
-        textColor: "",
-        isLock: false
-      });
-    }    
+  newColor(box :Box) : void {
+    this.boxes.splice(this.boxes.indexOf(box),0,{
+      hex: this.getRandomColor(),
+      textColor: "",
+      isLock: false
+    });  
   }
 }
 

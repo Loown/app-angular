@@ -6,7 +6,6 @@
     .btn-add-color {
       display: none;
     }
-
   }
 }
 
@@ -38,37 +37,106 @@
 
 .color-box {
   height: 100%;
+  box-shadow: rgb(101 98 86) 0px 0px 0px 1px;
+
+  .inner-box {
+    height: 100vh;
+
+    &:hover > .menu {
+      display: flex;
+    }
+    .left-bar {
+      position: relative;
+      height: 100vh;
+      width: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      left: -50px;
+
+      &:hover > .btn-add-color {
+        transform: scale(1);
+      }
+
+      .btn-add-color {
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        transition: all .2s;
+        display: flex;
+        transform: scale(0);
+      
+        .btn-add-icon {
+          padding-top: 5px;
+          padding-left: 10px;
+          font-size: 30px;
+        }
+      
+      }
+    }
+
+    .menu {
+      width: 40px;
+      position: relative;
+      bottom: 50%;
+      left: 50%;
+      height: 25%;
+      transform: translateX(-50%);
+      display: none;
+      flex-direction: column;
+      margin: 30px 0;
+      justify-content: space-between;
+
+      .box-icon {
+        text-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        font-size: 2.3rem;
+        opacity: 0.6;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 1;
+        }
+      
+        &.is-locked {
+          opacity: 1;
+        }
+      }
+    }
+
+    .infos {
+      position: relative;
+      bottom: 10%;
+      width: 100%;
+      z-index: 999;
+    }
+  }
 }
 
-.box-icon {
-  font-size: 2rem;
-  opacity: 0.6;
-  color: #000;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  &.is-locked {
-    opacity: 1;
-  }
+.testing {
+  border: 1px solid #000;
+  background-color: yellow;
+  flex-grow: 0;
+  transition: all 1s;
+  width: 10px;
 }
 
-.btn-add-color {
-  position: absolute;
-  background-color: #ffffff; // a enleve
-  top: 50%;
-  transform: translateX(-50%);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: 50px;
-  height: 50px;
+.tested {
+  flex-grow: 1;
+}
+// @keyframes expand {
+//   from {
+//     transform: scale(0);
+//     opacity: 0;
+//     background: #5470B0;
+//   }
+// }
+
+.left-bar {
+  // background-color: red;
+  height: 100vh;
+  width: 70;
+  position: relative;
+  left: -35px;
   display: flex;
-
-  .btn-add-icon {
-    padding-top: 5px;
-    padding-left: 10px;
-    font-size: 30px;
-  }
-
 }
