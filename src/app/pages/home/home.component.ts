@@ -100,9 +100,9 @@ export class HomeComponent implements OnInit {
   colorOfText(color: string): string {
     if (color.length === 7) {
       let colorSum: number = this.valueRGB(color[1]) + this.valueRGB(color[3]) + this.valueRGB(color[5]);
-      if ((colorSum - 22) < 0) return '#FFFFFF';
+      if ((colorSum - 24) > 0) return '#000000';
     }
-    return '#000000';
+    return '#FFFFFF';
   }
 
   copyToClipboard(box: Box) {
@@ -126,9 +126,11 @@ export class HomeComponent implements OnInit {
   }
 
   newColor(box :Box) : void {
+    const hex = this.getRandomColor();
+    const textColor = this.colorOfText(hex);
     this.boxes.splice(this.boxes.indexOf(box),0,{
-      hex: this.getRandomColor(),
-      textColor: "",
+      hex,
+      textColor,
       isLock: false
     });  
   }

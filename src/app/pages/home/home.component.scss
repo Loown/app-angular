@@ -1,6 +1,10 @@
 .page {
   height: 100vh;
 
+  @media screen and (min-width: 640px) {
+    //overflow: hidden;
+  }
+
   div:last-child {
 
     .btn-add-color {
@@ -105,10 +109,15 @@
     }
 
     .infos {
-      position: relative;
-      bottom: 10%;
-      width: 100%;
-      z-index: 999;
+      p { 
+        text-align: center;
+        transform: translateY(-100px);
+        font-size: 36px;
+      }
+      &:hover {
+        display: flex;
+        transform: translateY(-800px);
+      }
     }
   }
 }
