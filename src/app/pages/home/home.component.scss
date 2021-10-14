@@ -55,11 +55,16 @@
       height: 100vh;
       width: 100px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       left: -50px;
 
       &:hover > .btn-add-color {
+        transform: scale(1);
+      }
+
+      &:hover > .btn-add-gradient {
         transform: scale(1);
       }
 
@@ -71,6 +76,7 @@
         transition: all .2s;
         display: flex;
         transform: scale(0);
+        margin-bottom: 10px;
       
         .btn-add-icon {
           padding-top: 5px;
@@ -78,7 +84,23 @@
           font-size: 30px;
           color: #000;
         }
-      
+      }
+
+      .btn-add-gradient {
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        transition: all .2s;
+        display: flex;
+        transform: scale(0);
+
+        .btn-gradient-icon {
+          padding-top: 5px;
+          padding-left: 10px;
+          font-size: 30px;
+          color: #000;
+        }
       }
     }
 
@@ -101,10 +123,16 @@
 
       .icons {
         height: 300px;
+        width: 40px;
         display: flex;
         visibility: hidden;
         flex-direction: column;
         justify-content: space-between;
+
+        .mat-tooltip {
+          font-size: 3rem !important;
+          background-color: red !important;
+        }
 
         
         .box-icon {
@@ -137,7 +165,6 @@
       position: relative;
       top: -100%;
       left: 0;
-      z-index: 9999999;
       display: flex;
       flex-direction: column;
       justify-content: stretch;

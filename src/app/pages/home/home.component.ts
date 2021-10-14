@@ -9,6 +9,8 @@ export interface Box {
   isLock: boolean;
   shades: string[];
   isShadesView: boolean;
+  isGradient: boolean;
+  gradients?: string[];
 }
 
 
@@ -24,6 +26,12 @@ export interface Box {
       ]),
       transition(':leave', [
         animate('300ms', style({ 'flex-grow': 0, 'width': 0 }))
+      ])
+    ]),
+    trigger('shadeTransition', [
+      transition(':enter', [
+        style({ 'transform': 'translateY(100vh)' }),
+        animate('200ms', style({ 'transform': 'translateY(0)'  })),
       ])
     ]),
   ]
@@ -50,6 +58,7 @@ export class HomeComponent implements OnInit {
         shades,
         isLock: false,
         isShadesView: false,
+        isGradient: false,
       });
     }
   }
@@ -115,8 +124,9 @@ export class HomeComponent implements OnInit {
   }
 
   copyToClipboard(box: Box) {
-    navigator.clipboard.writeText('#' + box.hex);
-    this.matSnackBar.open('Code hexa enregistré : ' + box.hex, 'Fermé')
+    const writing = box.isGradient ? this.getBackground(box) : box.hex
+    navigator.clipboard.writeText(writing);
+    this.matSnackBar.open('Enregistré : ' + writing, 'Fermé')
   }
 
   lock(box: Box) {
@@ -144,6 +154,7 @@ export class HomeComponent implements OnInit {
       shades,
       isLock: false,
       isShadesView: false,
+      isGradient: false,
     });  
   }
 
@@ -157,6 +168,17 @@ export class HomeComponent implements OnInit {
       }
       return b;
     })
+  }
+
+  makeGradient(box: Box, index: number) {
+    console.log(box, this.boxes[index - 1])
+    box.isGradient = true;
+    box.gradients = [this.boxes[index - 1].hex]
+    this.removeColor(this.boxes[index - 1])
+  }
+
+  getBackground(box: Box) {
+    return box.isGradient ? `linear-gradient(45deg, ${box.hex}${box.gradients?.map((color: string) => `, ${color}`)})` : box.hex;
   }
 }
 

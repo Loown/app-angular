@@ -1,26 +1,32 @@
 <div class="columns m-0 page">
     <!-- <app-box *ngFor="let box of boxes" class="column p-0" [color]="box.color"></app-box> -->
-    <div class="column m-0 p-0 color-box" @testTransition [ngStyle]="{ backgroundColor: box.hex, color: box.textColor }"
+    <div class="column m-0 p-0 color-box" @testTransition [ngStyle]="{ background: getBackground(box), color: box.textColor }"
         *ngFor="let box of boxes; let i = index">
         <div class="inner-box">
             <div class="left-bar" >
-                <button  *ngIf="i > 0 && boxes.length < 8" mat-icon-button (click)=newColor(box) class="btn-add-color" style="z-index: 999;">
+                <button  *ngIf="i > 0 && boxes.length < 8" mat-icon-button (click)=newColor(box) class="btn-add-color" style="z-index: 999999999;">
                     <mat-icon class=btn-add-icon>add</mat-icon>
+                </button>
+                <button mat-icon-button class="btn-add-gradient" style="z-index: 999999999;" (click)="makeGradient(box, i)" *ngIf="!box.isGradient && !boxes[i - 1]?.isGradient">
+                    <mat-icon class=btn-gradient-icon>gradient</mat-icon>
                 </button>
             </div>
             <div class="menu" *ngIf="!box.isShadesView">
                 <div class="icons">
-                    <mat-icon class="box-icon" (click)="box.isShadesView = true">texture</mat-icon>
-                    <mat-icon (click)=copyToClipboard(box) class="box-icon">content_copy</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
-                    <mat-icon aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)" *ngIf="boxes.length > 2">close</mat-icon>
+                    <mat-icon matTooltipPosition="above" matTooltip="Liste des shades" class="box-icon" (click)="box.isShadesView = true" *ngIf="!box.isGradient">texture</mat-icon>
+                    <mat-icon matTooltipPosition="above" [matTooltip]="box.isGradient ? 'Copier le gradient' : 'Copier le code'" (click)=copyToClipboard(box) class="box-icon">content_copy</mat-icon>
+                    <mat-icon matTooltipPosition="above" matTooltip="Vérouiller la couleur" aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
+                    <mat-icon matTooltipPosition="above" matTooltip="Supprimer" aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)" *ngIf="boxes.length > 2">close</mat-icon>
                 </div>
                 <div class="infos">
                     <p>{{ box.hex }}</p>
+                    <div *ngIf="box.gradients?.length">
+                        <p *ngFor="let gradient of box.gradients">{{ gradient }}</p>
+                    </div>
                 </div>
             </div>
             <div class="shades" *ngIf="box.isShadesView">
-                <div *ngFor="let shade of box.shades" [ngStyle]="{ backgroundColor: shade }" (click)="selectShade(box, shade)">
+                <div *ngFor="let shade of box.shades" [ngStyle]="{ backgroundColor: shade }" (click)="selectShade(box, shade)" @shadeTransition>
                     <p class="shade-text" [ngClass]="{'current': box.hex.toLowerCase() === shade.toLowerCase()}">
                         {{ shade }}
                     </p>
