@@ -42,6 +42,7 @@
 .color-box {
   height: 100%;
   box-shadow: rgb(101 98 86) 0px 0px 0px 1px;
+  transition: all .5s ease-in-out;
 
   .inner-box {
     height: 100vh;

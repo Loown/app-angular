@@ -10,7 +10,7 @@ export interface Box {
   shades: string[];
   isShadesView: boolean;
   isGradient: boolean;
-  gradients?: string[];
+  gradients: string[];
 }
 
 
@@ -59,6 +59,7 @@ export class HomeComponent implements OnInit {
         isLock: false,
         isShadesView: false,
         isGradient: false,
+        gradients: [],
       });
     }
   }
@@ -155,6 +156,7 @@ export class HomeComponent implements OnInit {
       isLock: false,
       isShadesView: false,
       isGradient: false,
+      gradients: [],
     });  
   }
 
@@ -179,6 +181,24 @@ export class HomeComponent implements OnInit {
 
   getBackground(box: Box) {
     return box.isGradient ? `linear-gradient(45deg, ${box.hex}${box.gradients?.map((color: string) => `, ${color}`)})` : box.hex;
+  }
+
+  makeClassicBoxFromColor(color: string): Box {
+    return {
+      hex: color,
+      textColor: this.colorOfText(color),
+      isGradient: false,
+      shades: this.getShades(color),
+      isShadesView: false,
+      isLock: false,
+      gradients: [],
+    }
+  }
+
+  removeGradient(box: Box, index: number) {
+    const boxes = [this.makeClassicBoxFromColor(box.hex), ...box.gradients.map((color: string) => this.makeClassicBoxFromColor(color))]
+    this.removeColor(box);
+    this.boxes.splice(index, 0, ...boxes);
   }
 }
 

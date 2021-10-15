@@ -14,6 +14,7 @@
             <div class="menu" *ngIf="!box.isShadesView">
                 <div class="icons">
                     <mat-icon matTooltipPosition="above" matTooltip="Liste des shades" class="box-icon" (click)="box.isShadesView = true" *ngIf="!box.isGradient">texture</mat-icon>
+                    <mat-icon matTooltipPosition="above" matTooltip="Supprimer le gradient" class="box-icon" (click)="removeGradient(box, i)" *ngIf="box.isGradient">flip</mat-icon>
                     <mat-icon matTooltipPosition="above" [matTooltip]="box.isGradient ? 'Copier le gradient' : 'Copier le code'" (click)=copyToClipboard(box) class="box-icon">content_copy</mat-icon>
                     <mat-icon matTooltipPosition="above" matTooltip="Vérouiller la couleur" aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
                     <mat-icon matTooltipPosition="above" matTooltip="Supprimer" aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)" *ngIf="boxes.length > 2">close</mat-icon>
