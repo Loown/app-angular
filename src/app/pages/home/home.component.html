@@ -1,8 +1,7 @@
-<div class="columns m-0 page">
+<div class="columns m-0 page" cdkDropListGroup>
     <!-- <app-box *ngFor="let box of boxes" class="column p-0" [color]="box.color"></app-box> -->
-    <div class="column m-0 p-0 color-box" @testTransition [ngStyle]="{ background: getBackground(box), color: box.textColor }"
-        *ngFor="let box of boxes; let i = index">
-        <div class="inner-box">
+    <div class="column m-0 p-0 color-box" cdkDropList [cdkDropListData]="i" @testTransition *ngFor="let box of boxes; let i = index">
+        <div class="inner-box" cdkDrag cdkDragLockAxis="x" [ngStyle]="{ background: getBackground(box), color: box.textColor }" [cdkDragData]="i" (cdkDragEntered)="entered($event)">
             <div class="left-bar" >
                 <button  *ngIf="i > 0 && boxes.length < 8" mat-icon-button (click)=newColor(box) class="btn-add-color" style="z-index: 999999999;">
                     <mat-icon class=btn-add-icon>add</mat-icon>
@@ -16,6 +15,7 @@
                     <mat-icon matTooltipPosition="above" matTooltip="Liste des shades" class="box-icon" (click)="box.isShadesView = true" *ngIf="!box.isGradient">texture</mat-icon>
                     <mat-icon matTooltipPosition="above" matTooltip="Supprimer le gradient" class="box-icon" (click)="removeGradient(box, i)" *ngIf="box.isGradient">flip</mat-icon>
                     <mat-icon matTooltipPosition="above" [matTooltip]="box.isGradient ? 'Copier le gradient' : 'Copier le code'" (click)=copyToClipboard(box) class="box-icon">content_copy</mat-icon>
+                    <mat-icon matTooltipPosition="above" cdkDragHandle matTooltip="Déplacer la couleur" class="box-icon">pan_tool</mat-icon>
                     <mat-icon matTooltipPosition="above" matTooltip="Vérouiller la couleur" aria-hidden="false" aria-label="Example home icon" class="box-icon" [ngClass]="{ 'is-locked': box.isLock }" (click)="box.isLock = !box.isLock">lock</mat-icon>
                     <mat-icon matTooltipPosition="above" matTooltip="Supprimer" aria-hidden="false" aria-label="Example home icon" class="box-icon" (click)="removeColor(box)" *ngIf="boxes.length > 2">close</mat-icon>
                 </div>

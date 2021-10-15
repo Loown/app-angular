@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatSnackBarModule,
     MatTooltipModule,
+    DragDropModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

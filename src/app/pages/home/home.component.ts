@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, EventEmitter } from '@angular/core';
 import { ColorService } from 'src/app/services/color.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { CdkDragEnter, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export interface Box {
   hex: string;
@@ -199,6 +200,11 @@ export class HomeComponent implements OnInit {
     const boxes = [this.makeClassicBoxFromColor(box.hex), ...box.gradients.map((color: string) => this.makeClassicBoxFromColor(color))]
     this.removeColor(box);
     this.boxes.splice(index, 0, ...boxes);
+  }
+
+  entered(event: CdkDragEnter) {
+    console.log(event);
+    moveItemInArray(this.boxes, event.item.data, event.container.data);
   }
 }
 

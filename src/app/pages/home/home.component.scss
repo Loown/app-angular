@@ -44,6 +44,10 @@
   box-shadow: rgb(101 98 86) 0px 0px 0px 1px;
   transition: all .5s ease-in-out;
 
+  .cdk-drag-preview {
+    border: 1px solid #000;;
+  }
+
   .inner-box {
     height: 100vh;
 
