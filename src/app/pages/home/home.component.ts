@@ -23,7 +23,7 @@ export interface Box {
     trigger('testTransition', [
       transition(':enter', [
         style({ 'flex-grow': 0, 'width': 0 }),
-        animate('300ms', style({ 'flex-grow': 1  })),
+        animate('300ms', style({ 'flex-grow': 1 })),
       ]),
       transition(':leave', [
         animate('300ms', style({ 'flex-grow': 0, 'width': 0 }))
@@ -32,7 +32,7 @@ export interface Box {
     trigger('shadeTransition', [
       transition(':enter', [
         style({ 'transform': 'translateY(100vh)' }),
-        animate('200ms', style({ 'transform': 'translateY(0)'  })),
+        animate('200ms', style({ 'transform': 'translateY(0)' })),
       ])
     ]),
   ]
@@ -76,11 +76,19 @@ export class HomeComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
-    console.log(event)
+    //console.log(event)
     if (event.code === 'Space') {
       this.generate();
-      //do event dispatch
-
+    }
+    //debuging
+    else if (event.key === 't') {
+      console.log("test");
+      let a = document.getElementsByClassName("cdk-drag-dragging");
+      if (a) {
+        console.log(a);
+        //console.log(a);
+      }
+      //-----------------------------
     }
   }
 
@@ -146,11 +154,11 @@ export class HomeComponent implements OnInit {
     this.boxes = this.boxes.filter((b: Box) => b.hex !== box.hex)
   }
 
-  newColor(box :Box) : void {
+  newColor(box: Box): void {
     const hex = this.getRandomColor();
     const textColor = this.colorOfText(hex);
     const shades = this.getShades(hex);
-    this.boxes.splice(this.boxes.indexOf(box),0,{
+    this.boxes.splice(this.boxes.indexOf(box), 0, {
       hex,
       textColor,
       shades,
@@ -158,7 +166,7 @@ export class HomeComponent implements OnInit {
       isShadesView: false,
       isGradient: false,
       gradients: [],
-    });  
+    });
   }
 
   selectShade(box: Box, shade: string) {
@@ -203,7 +211,7 @@ export class HomeComponent implements OnInit {
   }
 
   entered(event: CdkDragEnter) {
-    console.log(event);
+    //console.log(event);
     moveItemInArray(this.boxes, event.item.data, event.container.data);
   }
 }
